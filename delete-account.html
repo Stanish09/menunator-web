@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuń konto – Menunator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #f5f5f5;
+      padding: 40px 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #e87722;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #e87722;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 12px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 28px;
+    }
+    .step {
+      display: flex;
+      gap: 14px;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 32px;
+      bottom: 0;
+      width: 2px;
+      background: #f0f0f0;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff3e8;
+      border: 2px solid #e87722;
+      color: #e87722;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-body {
+      padding-bottom: 20px;
+      padding-top: 5px;
+    }
+    .step:last-child .step-body { padding-bottom: 0; }
+    .step-text {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+    }
+    .step-text strong { color: #1a1a1a; }
+    .step-path {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-top: 6px;
+    }
+    .step-path .arrow { color: #aaa; font-size: 12px; }
+    .warning {
+      background: #fff8f0;
+      border: 1px solid #f5d9b8;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .warning-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .warning-text { font-size: 14px; color: #7a4a1a; line-height: 1.6; }
+    .divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin-bottom: 24px;
+    }
+    .fallback-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .fallback-text {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .email-link {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e87722;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .email-link:hover { text-decoration: underline; }
+    .open-btn {
+      display: block;
+      width: 100%;
+      background: #e87722;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 15px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 28px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; }
+      .card { background: #1e1e1e; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+      .logo-name { color: #f0f0f0; }
+      h1 { color: #f0f0f0; }
+      .subtitle { color: #aaa; }
+      .step:not(:last-child)::after { background: #333; }
+      .step-num { background: #2e1f0e; border-color: #e87722; }
+      .step-text { color: #ccc; }
+      .step-text strong { color: #f0f0f0; }
+      .step-path { background: #2a2a2a; color: #f0f0f0; }
+      .warning { background: #231708; border-color: #5a3010; }
+      .warning-text { color: #d4965a; }
+      .divider { background: #333; }
+      .fallback-title { color: #f0f0f0; }
+      .fallback-text { color: #aaa; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="logo">
+      <div class="logo-icon">🍽️</div>
+      <span class="logo-name">Menunator</span>
+    </div>
+
+    <h1>Usuwanie konta</h1>
+    <p class="subtitle">
+      Możesz usunąć swoje konto bezpośrednio z aplikacji Menunator w kilku prostych krokach.
+    </p>
+
+    <div class="section-label">Jak usunąć konto</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-text">Otwórz aplikację <strong>Menunator</strong> i przejdź do zakładki</div>
+          <div class="step-path">Kuchnia</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-text">Przewiń na dół strony i znajdź przycisk</div>
+          <div class="step-path">Usuń konto</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-text"><strong>Potwierdź</strong> operację w oknie dialogowym.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        Usunięcie konta jest <strong>nieodwracalne</strong>. Zostaną usunięte wszystkie Twoje przepisy, plan posiłków i listy zakupów.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="fallback-title">Nie możesz zalogować się do aplikacji?</div>
+    <p class="fallback-text">
+      Napisz do nas — usuniemy Twoje dane ręcznie w ciągu 7 dni roboczych.
+    </p>
+    <a class="email-link" href="mailto:patryk.stan95@gmail.com">patryk.stan95@gmail.com</a>
+
+    <a class="open-btn" href="menunator://">Otwórz Menunator</a>
+
+  </div>
+</body>
+</html>
